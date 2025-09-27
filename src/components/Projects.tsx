@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 interface Project {
     shortLabel: string;
@@ -531,10 +533,11 @@ const Projects: React.FC = () => {
                                                         onClick={() => openLightbox(imageIndex)}
                                                     />
                                                 ) : (
-                                                    <img
+                                                    <LazyLoadImage
                                                         src={images[imageIndex]}
+                                                        alt={`Project image ${imageIndex + 1}`}
                                                         className="w-full h-full object-cover cursor-pointer active:cursor-grabbing"
-                                                        loading="lazy"
+                                                        effect="blur"
                                                         draggable={false}
                                                         onClick={() => openLightbox(imageIndex)}
                                                     />

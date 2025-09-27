@@ -32,16 +32,19 @@ export default defineConfig(({ mode }) => {
                 ? [
                       ViteImageOptimizer({
                           jpg: {
-                              quality: 80,
+                              quality: 70,
                           },
                           jpeg: {
-                              quality: 80,
+                              quality: 70,
                           },
                           png: {
-                              quality: 80,
+                              quality: 70,
                           },
                           webp: {
-                              quality: 80,
+                              quality: 70,
+                          },
+                          avif: {
+                              quality: 70,
                           },
                       }),
                   ]

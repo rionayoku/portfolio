@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { LazyMotion, domAnimation } from 'framer-motion';
 import GlobalBackground from './components/GlobalBackground';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Skills from './components/Skills';
 import Experience from './components/Experience';
-import Projects from './components/Projects';
+const Projects = lazy(() => import('./components/Projects'));
 import Education from './components/Education';
 import Contact from './components/Contact';
 import MobileNav from './components/MobileNav';
@@ -39,7 +39,11 @@ const App: React.FC = () => {
                     <Navbar />
                     <main>
                         <Hero />
-                        <SectionWrapper id="projects"><Projects /></SectionWrapper>
+                        <SectionWrapper id="projects">
+                            <Suspense fallback={<div className="flex justify-center items-center h-64"><div className="w-8 h-8 border-2 border-white/20 border-t-[#00d9ff] rounded-full animate-spin"></div></div>}>
+                                <Projects />
+                            </Suspense>
+                        </SectionWrapper>
                         <SectionWrapper id="skills"><Skills /></SectionWrapper>
                         <SectionWrapper id="experience"><Experience /></SectionWrapper>
                         <SectionWrapper id="education"><Education /></SectionWrapper>
