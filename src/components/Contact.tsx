@@ -2,7 +2,7 @@ import React from 'react';
 
 const contactInfo = [
     { icon: 'fa-envelope', title: 'Email', detail: 'riona.yoku@gmail.com' },
-    { icon: 'fa-phone', title: 'Phone/WhatsApp', detail: '+62 851 6130 2281', link: 'https://wa.me/6285161302281' },
+    { icon: 'fa-phone', title: 'Phone/WhatsApp', detail: '+62 821 9091 4552', link: 'https://wa.me/6282190914552' },
     { icon: 'fa-map-marker-alt', title: 'Location', detail: 'Jayapura, Papua' },
 ];
 
