@@ -367,7 +367,7 @@ const Projects: React.FC = () => {
         <section className="py-16 lg:py-20 relative">
             <div className="max-w-[1400px] mx-auto px-6 sm:px-8 md:px-[30px]">
                 <div className="text-center mb-12">
-                    <h2 className="section-title">Network & Infrastructure Projects</h2>                    
+                    <h2 className="section-title">Projects</h2>                    
                 </div>
 
                  {/* Mobile Project Navigation */}

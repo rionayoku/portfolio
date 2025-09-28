@@ -13,7 +13,7 @@ const skillsData: Skill[] = [
     { icon: 'fa-code', title: 'Scripting & Automation', items: ['Python (Zabbix API)', 'Telegram Bot Development', 'Bash Scripting', 'Task Automation', 'API Integration'] },
     { icon: 'fa-network-wired', title: 'Infrastructure', items: ['Ubuntu Server Administration', 'TrueNAS SCALE', 'Docker Containerization', 'Proxmox VE', 'Virtualization Platforms'] },
     { icon: 'fa-shield-alt', title: 'Network & Security', items: ['Firewall Configuration', 'DNS Management', 'VPN Implementation', 'NAT Configuration', 'Subnetting & VLAN'] },
-    { icon: 'fa-globe', title: 'Web Stack', items: ['NGINX Configuration', 'Next.js Development', 'Node.js Applications', 'PostgreSQL (Basic Admin)', 'Reverse Proxy Setup'] },
+    { icon: 'fa-globe', title: 'Web Stack', items: ['NGINX Configuration', 'Next.js Development', 'Node.js Applications', 'PostgreSQL, MySQL', 'Reverse Proxy Setup'] },
 ];
 
 const Skills: React.FC = () => {
