@@ -15,7 +15,7 @@ interface NavBarProps {
 }
 
 export function NavBar({ items, className }: NavBarProps) {
-  const [activeTab, setActiveTab] = useState(items[0].name)
+  const [activeTab, setActiveTab] = useState(items?.[0]?.name ?? '')
   const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
@@ -28,6 +28,49 @@ export function NavBar({ items, className }: NavBarProps) {
     return () => window.removeEventListener("resize", handleResize)
   }, [])
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = items.map(item => item.url.substring(1)) // Remove # from href
+      const scrollPosition = window.scrollY + window.innerHeight * 0.3 // 30% of viewport height
+
+      // Special handling for the last section (Contact) - make it trigger earlier
+      if (scrollPosition > document.body.scrollHeight - window.innerHeight * 0.8) {
+        setActiveTab(items[items.length - 1].name)
+        return
+      }
+
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const section = document.getElementById(sections[i])
+        if (section) {
+          const offsetTop = section.offsetTop
+          const offsetHeight = section.offsetHeight
+
+          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+            setActiveTab(items[i].name)
+            break
+          }
+        }
+      }
+    }
+
+    // Use requestAnimationFrame for smoother performance
+    let ticking = false
+    const requestScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          handleScroll()
+          ticking = false
+        })
+        ticking = true
+      }
+    }
+
+    window.addEventListener("scroll", requestScroll, { passive: true })
+    handleScroll() // Set initial active tab
+
+    return () => window.removeEventListener("scroll", requestScroll)
+  }, [items])
+
   const handleScrollClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault()
     const href = e.currentTarget.getAttribute('href')
@@ -35,7 +78,7 @@ export function NavBar({ items, className }: NavBarProps) {
       const target = document.querySelector(href)
       if (target) {
         target.scrollIntoView({ behavior: 'smooth', block: 'start' })
-        setActiveTab(e.currentTarget.textContent || items[0].name)
+        setActiveTab(e.currentTarget.textContent || items?.[0]?.name || '')
       }
     }
   }
@@ -123,9 +166,9 @@ export function NavBar({ items, className }: NavBarProps) {
 const Navbar: React.FC = () => {
   const navItems: NavItem[] = [
     { name: "Home", url: "#home", icon: Home },
+    { name: "Projects", url: "#projects", icon: FolderOpen },
     { name: "Skills", url: "#skills", icon: Code },
     { name: "Experience", url: "#experience", icon: Briefcase },
-    { name: "Projects", url: "#projects", icon: FolderOpen },
     { name: "Education", url: "#education", icon: GraduationCap },
     { name: "Contact", url: "#contact", icon: Mail },
   ]
