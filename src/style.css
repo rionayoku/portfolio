@@ -56,6 +56,9 @@ html {
 .project-slider-container {
   background-color: rgba(0,0,0,0.2);
   user-select: none;
+  position: relative;
+  z-index: 1;
+  pointer-events: auto;
 }
 .slider-arrow {
     position: absolute;
@@ -71,8 +74,9 @@ html {
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    z-index: 10;
+    z-index: 20;
     transition: all 0.2s ease-in-out;
+    pointer-events: auto;
 }
 .slider-arrow:hover {
     background-color: rgba(0, 0, 0, 0.7);
@@ -85,12 +89,13 @@ html {
     transform: translateX(-50%);
     display: flex;
     gap: 12px;
-    z-index: 10;
+    z-index: 20;
     background-color: rgba(0, 0, 0, 0.3);
     padding: 8px 16px;
     border-radius: 20px;
     backdrop-filter: blur(4px);
     border: 1px solid rgba(255, 255, 255, 0.1);
+    pointer-events: none;
 }
 .slider-dot {
     width: 12px;
@@ -100,6 +105,7 @@ html {
     cursor: pointer;
     transition: all 0.2s ease-in-out;
     border: 1px solid rgba(0,0,0,0.2);
+    pointer-events: auto;
 }
 .slider-dot:hover {
   background-color: rgba(255, 255, 255, 0.6);

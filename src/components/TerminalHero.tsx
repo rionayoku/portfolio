@@ -15,9 +15,11 @@ const CISCO_COMMANDS: CommandStep[] = [
   { type: 'command', text: 'whoami', prompt: 'user@you:~$' },
   { type: 'output', text: 'Hi, I\'m Mario Harold Yoku, an IT Network & Systems Engineer with 8+ years of experience.' },
   { type: 'command', text: 'show specialist', prompt: 'user@you:~$' },
-  { type: 'output', text: 'specialized in network monitoring, automation, and data center ops.' },
+  { type: 'output', text: 'specialized in designing, monitoring, and automating complex network infrastructures—including all aspects of data center operations.' },
   { type: 'command', text: 'show love', prompt: 'user@you:~$', },
-  { type: 'output', text: 'Love troubleshooting and bringing reliable systems to remote locations.' },
+  { type: 'output', text: 'Love troubleshooting and exploring any tech-related topics - AI, open-sources, self-hosting, automations.' },
+  { type: 'command', text: 'show hobbies', prompt: 'user@you:~$', },
+  { type: 'output', text: 'gaming, football, Pentesting, Cybersecurity and tinkering with Hardware or Home Labs.' },
 ];
 const TYPING_SPEED = 90;
 const COMMAND_PAUSE = 800;

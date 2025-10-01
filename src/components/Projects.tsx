@@ -501,10 +501,11 @@ const Projects: React.FC = () => {
                             >
                                 {/* Image Slider FIRST */}
                                 <div className="w-full lg:w-1/2 flex-shrink-0" style={{ perspective: '1000px' }}>
-                                    <div 
+                                    <div
                                         className="project-slider-container relative w-full aspect-[4/3] overflow-hidden rounded-lg border border-white/10"
                                         onMouseEnter={handleMouseEnter}
                                         onMouseLeave={handleMouseLeave}
+                                        style={{ zIndex: 1 }}
                                     >
                                         <AnimatePresence initial={false} custom={direction}>
                                             <motion.div
@@ -520,26 +521,35 @@ const Projects: React.FC = () => {
                                                     opacity: { duration: 0.2 }
                                                 }}
                                                 className="absolute w-full h-full"
+                                                style={{ pointerEvents: 'auto' }}
                                             >
                                                 {isVideo(images[imageIndex]) ? (
                                                     <video
                                                         src={images[imageIndex]}
-                                                        className="w-full h-full object-cover cursor-pointer"
+                                                        className="w-full h-full object-cover cursor-pointer hover:opacity-90 transition-opacity duration-200"
                                                         autoPlay
                                                         muted
                                                         loop
                                                         playsInline
                                                         preload="none"
-                                                        onClick={() => openLightbox(imageIndex)}
+                                                        onClick={(e) => {
+                                                            e.preventDefault();
+                                                            e.stopPropagation();
+                                                            openLightbox(imageIndex);
+                                                        }}
                                                     />
                                                 ) : (
                                                     <LazyLoadImage
                                                         src={images[imageIndex]}
                                                         alt={`Project image ${imageIndex + 1}`}
-                                                        className="w-full h-full object-cover cursor-pointer active:cursor-grabbing"
+                                                        className="w-full h-full object-cover cursor-pointer active:cursor-grabbing hover:opacity-90 transition-opacity duration-200"
                                                         effect="blur"
                                                         draggable={false}
-                                                        onClick={() => openLightbox(imageIndex)}
+                                                        onClick={(e) => {
+                                                            e.preventDefault();
+                                                            e.stopPropagation();
+                                                            openLightbox(imageIndex);
+                                                        }}
                                                     />
                                                 )}
 
@@ -549,18 +559,45 @@ const Projects: React.FC = () => {
                                         
                                         {images.length > 1 && (
                                             <>
-                                                <button aria-label="Previous Image" onClick={() => paginate(-1)} className="slider-arrow left-2 md:left-4"><i className="fa-solid fa-chevron-left"></i></button>
-                                                <button aria-label="Next Image" onClick={() => paginate(1)} className="slider-arrow right-2 md:right-4"><i className="fa-solid fa-chevron-right"></i></button>
+                                                <button
+                                                    aria-label="Previous Image"
+                                                    onClick={(e) => {
+                                                        e.preventDefault();
+                                                        e.stopPropagation();
+                                                        paginate(-1);
+                                                    }}
+                                                    className="slider-arrow left-2 md:left-4"
+                                                    style={{ pointerEvents: 'auto' }}
+                                                >
+                                                    <i className="fa-solid fa-chevron-left"></i>
+                                                </button>
+                                                <button
+                                                    aria-label="Next Image"
+                                                    onClick={(e) => {
+                                                        e.preventDefault();
+                                                        e.stopPropagation();
+                                                        paginate(1);
+                                                    }}
+                                                    className="slider-arrow right-2 md:right-4"
+                                                    style={{ pointerEvents: 'auto' }}
+                                                >
+                                                    <i className="fa-solid fa-chevron-right"></i>
+                                                </button>
                                             </>
                                         )}
                                         
                                         <div className="slider-dots">
                                             {images.map((_, i) => (
-                                                <button 
+                                                <button
                                                   aria-label={`Go to image ${i + 1}`}
-                                                  key={i} 
-                                                  className={`slider-dot ${imageIndex === i ? 'active' : ''}`} 
-                                                  onClick={() => jumpToImage(i)}
+                                                  key={i}
+                                                  className={`slider-dot ${imageIndex === i ? 'active' : ''}`}
+                                                  onClick={(e) => {
+                                                    e.preventDefault();
+                                                    e.stopPropagation();
+                                                    jumpToImage(i);
+                                                  }}
+                                                  style={{ pointerEvents: 'auto' }}
                                                 ></button>
                                             ))}
                                         </div>
@@ -615,47 +652,106 @@ const Projects: React.FC = () => {
                             </motion.div>
                         </AnimatePresence>
                         {/* Lightbox modal for full-size images */}
-                        {lightboxOpen && (
-                            <div
-                                className="fixed inset-0 z-[2000] flex items-center justify-center bg-black/70 p-4"
-                                onClick={closeLightbox}
-                            >
-                                <div className="absolute top-4 right-4 md:top-6 md:right-6">
-                                    <button aria-label="Close" onClick={closeLightbox} className="text-white text-2xl p-3 rounded-md bg-black/30">✕</button>
-                                </div>
-
-                                <button aria-label="Previous" onClick={(e) => { e.stopPropagation(); lightboxPrev(); }} className="absolute left-4 md:left-6 text-white text-2xl p-3 rounded-md bg-black/30">◀</button>
-
-                                <div
-                                    className={`max-w-[95vw] max-h-[95vh] flex items-center justify-center p-2 ${lightboxIsPortrait ? 'px-6' : ''}`}
-                                    onClick={(e) => e.stopPropagation()}
-                                    onTouchStart={onLightboxTouchStart}
-                                    onTouchEnd={onLightboxTouchEnd}
+                        <AnimatePresence>
+                            {lightboxOpen && (
+                                <motion.div
+                                    className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
+                                    style={{
+                                        background: 'rgba(0, 0, 0, 0.9)',
+                                        backdropFilter: 'blur(8px)'
+                                    }}
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    exit={{ opacity: 0 }}
+                                    transition={{ duration: 0.2 }}
+                                    onClick={closeLightbox}
                                 >
-                                    {isVideo(images[lightboxIndex]) ? (
-                                        <video
-                                            src={images[lightboxIndex]}
-                                            className="max-w-[95vw] max-h-[95vh] rounded-md"
-                                            autoPlay
-                                            muted
-                                            loop
-                                            playsInline
-                                            preload="none"
-                                            controls={false}
-                                        />
-                                    ) : (
-                                        <img
-                                            src={images[lightboxIndex]}
-                                            className={`rounded-md ${lightboxIsPortrait ? 'max-h-[90vh] w-auto' : 'max-w-[95vw] max-h-[95vh] h-auto w-auto'}`}
-                                            draggable={false}
-                                            onLoad={onLightboxImageLoad}
-                                        />
-                                    )}
-                                </div>
+                                    {/* Close button */}
+                                    <motion.button
+                                        className="absolute top-4 right-4 md:top-6 md:right-6 text-white text-3xl p-3 rounded-full bg-black/50 hover:bg-black/70 transition-all duration-200 z-[10000]"
+                                        style={{ zIndex: 10000 }}
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            closeLightbox();
+                                        }}
+                                        whileHover={{ scale: 1.1 }}
+                                        whileTap={{ scale: 0.9 }}
+                                    >
+                                        ✕
+                                    </motion.button>
 
-                                <button aria-label="Next" onClick={(e) => { e.stopPropagation(); lightboxNext(); }} className="absolute right-4 md:right-6 text-white text-2xl p-3 rounded-md bg-black/30">▶</button>
-                            </div>
-                        )}
+                                    {/* Previous button */}
+                                    <motion.button
+                                        className="absolute left-4 md:left-8 text-white text-4xl p-4 rounded-full bg-black/50 hover:bg-black/70 transition-all duration-200 z-[10000]"
+                                        style={{ zIndex: 10000 }}
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            lightboxPrev();
+                                        }}
+                                        whileHover={{ scale: 1.1, x: -2 }}
+                                        whileTap={{ scale: 0.9 }}
+                                    >
+                                        ‹
+                                    </motion.button>
+
+                                    {/* Main content */}
+                                    <motion.div
+                                        className={`max-w-[95vw] max-h-[95vh] flex items-center justify-center p-2 ${lightboxIsPortrait ? 'px-6' : ''}`}
+                                        onClick={(e) => e.stopPropagation()}
+                                        onTouchStart={onLightboxTouchStart}
+                                        onTouchEnd={onLightboxTouchEnd}
+                                        initial={{ scale: 0.8, opacity: 0 }}
+                                        animate={{ scale: 1, opacity: 1 }}
+                                        exit={{ scale: 0.8, opacity: 0 }}
+                                        transition={{ duration: 0.2 }}
+                                    >
+                                        {isVideo(images[lightboxIndex]) ? (
+                                            <video
+                                                src={images[lightboxIndex]}
+                                                className="max-w-[95vw] max-h-[95vh] rounded-lg shadow-2xl"
+                                                autoPlay
+                                                muted
+                                                loop
+                                                playsInline
+                                                preload="none"
+                                                controls={false}
+                                            />
+                                        ) : (
+                                            <img
+                                                src={images[lightboxIndex]}
+                                                className={`rounded-lg shadow-2xl ${lightboxIsPortrait ? 'max-h-[90vh] w-auto' : 'max-w-[95vw] max-h-[95vh] h-auto w-auto'}`}
+                                                draggable={false}
+                                                onLoad={onLightboxImageLoad}
+                                            />
+                                        )}
+                                    </motion.div>
+
+                                    {/* Next button */}
+                                    <motion.button
+                                        className="absolute right-4 md:right-8 text-white text-4xl p-4 rounded-full bg-black/50 hover:bg-black/70 transition-all duration-200 z-[10000]"
+                                        style={{ zIndex: 10000 }}
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            lightboxNext();
+                                        }}
+                                        whileHover={{ scale: 1.1, x: 2 }}
+                                        whileTap={{ scale: 0.9 }}
+                                    >
+                                        ›
+                                    </motion.button>
+
+                                    {/* Image counter */}
+                                    <motion.div
+                                        className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/60 text-white px-4 py-2 rounded-full text-sm font-medium"
+                                        initial={{ y: 20, opacity: 0 }}
+                                        animate={{ y: 0, opacity: 1 }}
+                                        transition={{ delay: 0.1 }}
+                                    >
+                                        {lightboxIndex + 1} / {images.length}
+                                    </motion.div>
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
                     </div>
                 </div>
             </div>
