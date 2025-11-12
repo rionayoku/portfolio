@@ -15,16 +15,23 @@ interface NavBarProps {
 }
 
 export function NavBar({ items, className }: NavBarProps) {
-  const [activeTab, setActiveTab] = useState(items?.[0]?.name ?? '')
+  // Guard against empty items array
+  const safeItems = items && items.length > 0 ? items : []
+  const [activeTab, setActiveTab] = useState(safeItems?.[0]?.name ?? '')
 
   useEffect(() => {
+    // Return early if items array is empty
+    if (!safeItems || safeItems.length === 0) {
+      return
+    }
+
     const handleScroll = () => {
-      const sections = items.map(item => item.url.substring(1)) // Remove # from href
+      const sections = safeItems.map(item => item.url.substring(1)) // Remove # from href
       const scrollPosition = window.scrollY + window.innerHeight * 0.3 // 30% of viewport height
 
       // Special handling for the last section (Contact) - make it trigger earlier
       if (scrollPosition > document.body.scrollHeight - window.innerHeight * 0.8) {
-        setActiveTab(items[items.length - 1].name)
+        setActiveTab(safeItems[safeItems.length - 1].name)
         return
       }
 
@@ -35,7 +42,7 @@ export function NavBar({ items, className }: NavBarProps) {
           const offsetHeight = section.offsetHeight
 
           if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-            setActiveTab(items[i].name)
+            setActiveTab(safeItems[i].name)
             break
           }
         }
@@ -58,16 +65,16 @@ export function NavBar({ items, className }: NavBarProps) {
     handleScroll() // Set initial active tab
 
     return () => window.removeEventListener("scroll", requestScroll)
-  }, [items])
+  }, [safeItems])
 
-  const handleScrollClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+  const handleScrollClick = (item: NavItem) => (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault()
     const href = e.currentTarget.getAttribute('href')
     if (href) {
       const target = document.querySelector(href)
       if (target) {
         target.scrollIntoView({ behavior: 'smooth', block: 'start' })
-        setActiveTab(e.currentTarget.textContent || items?.[0]?.name || '')
+        setActiveTab(item.name)
       }
     }
   }
@@ -88,7 +95,7 @@ export function NavBar({ items, className }: NavBarProps) {
         boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.37), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
         pointerEvents: 'auto'
       }}>
-        {items.map((item) => {
+        {safeItems.map((item) => {
           const Icon = item.icon
           const isActive = activeTab === item.name
 
@@ -96,7 +103,7 @@ export function NavBar({ items, className }: NavBarProps) {
             <a
               key={item.name}
               href={item.url}
-              onClick={handleScrollClick}
+              onClick={handleScrollClick(item)}
               className={cn(
                 "relative cursor-pointer text-sm font-semibold px-4 py-2 rounded-full transition-all duration-300 ease-out",
                 "text-white/70 hover:text-white hover:scale-105",

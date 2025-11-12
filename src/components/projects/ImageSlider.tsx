@@ -34,6 +34,21 @@ const sliderVariants = {
 };
 
 export const ImageSlider: React.FC<ImageSliderProps> = ({ images, onImageClick }) => {
+    // Guard: Return fallback UI if no images are provided
+    if (!images || images.length === 0) {
+        return (
+            <div
+                className="project-slider-container relative w-full aspect-[4/3] overflow-hidden rounded-lg border border-white/10 bg-white/5 flex items-center justify-center"
+                style={{ pointerEvents: 'auto' }}
+            >
+                <div className="text-center">
+                    <i className="fa-solid fa-image text-white/30 text-4xl mb-3 block"></i>
+                    <p className="text-white/50 text-sm font-medium">No images available</p>
+                </div>
+            </div>
+        );
+    }
+
     const [[page, direction], setPage] = useState([0, 0]);
     const [isAutoSliding, setIsAutoSliding] = useState(true);
     const timerRef = React.useRef<NodeJS.Timeout | null>(null);
@@ -45,13 +60,11 @@ export const ImageSlider: React.FC<ImageSliderProps> = ({ images, onImageClick }
     };
 
     const jumpToImage = (index: number) => {
-        setPage([index, index > imageIndex ? 1 : -1]);
+        const direction = index > imageIndex ? 1 : -1;
+        setPage([index, direction]);
     };
 
     const startAutoSlide = () => {
-        if (timerRef.current) {
-            clearTimeout(timerRef.current);
-        }
         const delayMs = isVideo(images[imageIndex]) ? 50000 : 4000;
         timerRef.current = setTimeout(() => paginate(1), delayMs);
     };

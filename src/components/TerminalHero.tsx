@@ -4,7 +4,7 @@ interface Line {
   id: string;
   type: 'command' | 'output';
   text: string;
-  prompt: string;
+  prompt?: string;
 }
 interface CommandStep {
   type: 'command' | 'output';
@@ -151,7 +151,7 @@ const TerminalHero: React.FC = () => {
       <Terminal>
         {lines.map(line => (
           <div key={line.id} className="mb-1" style={{ wordBreak: 'break-word', overflowWrap: 'break-word', maxWidth: '100%' }}>
-            <span className="text-gray-400 mr-1">{line.prompt}</span>
+            <span className="text-gray-400 mr-1">{line.prompt || ''}</span>
             <span className="whitespace-pre-wrap" style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>{line.text}</span>
           </div>
         ))}

@@ -39,28 +39,41 @@ export const useLightbox = ({ imageCount, isOpen, onClose }: UseLightboxProps) =
 
     // Touch gesture handling
     const touchStartXRef = useRef<number | null>(null);
+    const touchStartYRef = useRef<number | null>(null);
     const touchStartTimeRef = useRef<number | null>(null);
 
     const onTouchStart = (e: React.TouchEvent) => {
+        // Guard: Don't track touches if lightbox is not open
+        if (!isOpen) return;
+
         touchStartXRef.current = e.touches[0].clientX;
+        touchStartYRef.current = e.touches[0].clientY;
         touchStartTimeRef.current = Date.now();
     };
 
     const onTouchEnd = (e: React.TouchEvent) => {
+        // Guard: Don't handle touches if lightbox is not open
+        if (!isOpen) return;
+
         const startX = touchStartXRef.current;
+        const startY = touchStartYRef.current;
         const startTime = touchStartTimeRef.current;
-        if (startX == null || startTime == null) return;
+        if (startX == null || startY == null || startTime == null) return;
 
         const endX = e.changedTouches[0].clientX;
+        const endY = e.changedTouches[0].clientY;
         const dx = endX - startX;
+        const dy = endY - startY;
         const dt = Date.now() - startTime;
 
-        if (Math.abs(dx) > 40 && dt < 1000) { // Swipe detection
+        // Swipe detection: require primarily horizontal swipes
+        if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) && dt < 1000) {
             if (dx > 0) prev();
             else next();
         }
 
         touchStartXRef.current = null;
+        touchStartYRef.current = null;
         touchStartTimeRef.current = null;
     };
 

@@ -13,28 +13,26 @@ const Projects: React.FC = () => {
     const [selectedTab, setSelectedTab] = useState(0);
     const [isLightboxOpen, setIsLightboxOpen] = useState(false);
 
-    const selectedProject = projectsData[selectedTab];
+    const selectedProject = projectsData[selectedTab] || projectsData[0];
+    
+    if (!selectedProject || !projectsData.length) {
+        return <section className="py-16 lg:py-20"><div className="max-w-[1400px] mx-auto px-6"><p>No projects available</p></div></section>;
+    }
 
     const { currentIndex, setCurrentIndex, prev, next, touchHandlers } = useLightbox({
-        imageCount: selectedProject.images.length,
+        imageCount: selectedProject.images?.length || 0,
         isOpen: isLightboxOpen,
         onClose: () => setIsLightboxOpen(false),
     });
 
     const handleOpenLightbox = (index: number) => {
-        console.log('🔍 handleOpenLightbox called with index:', index, 'Project:', selectedProject.title);
-        console.log('📊 Current state - isLightboxOpen:', isLightboxOpen, 'currentIndex:', currentIndex);
         setCurrentIndex(index);
         setIsLightboxOpen(true);
-        console.log('✅ Lightbox state updated');
     };
 
     const handleTabChange = (index: number) => {
-        console.log('Changing to project tab:', index, 'Project:', projectsData[index].title);
         setSelectedTab(index);
     };
-
-
     return (
         <section className="py-16 lg:py-20 relative">
             <div className="max-w-[1400px] mx-auto px-6 sm:px-8 md:px-[30px]">

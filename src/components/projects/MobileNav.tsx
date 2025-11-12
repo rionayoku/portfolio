@@ -60,14 +60,23 @@ export const MobileNav: React.FC<MobileNavProps> = ({
                     style={{ scrollSnapType: 'x mandatory' }}
                 >
                     {projects.map((project, index) => (
-                        <div
+                        <button
                             key={index}
-                            className={`flex-shrink-0 w-64 rounded-xl border-2 transition-all duration-300 cursor-pointer ${
+                            onClick={() => handleTabChange(index)}
+                            onKeyDown={(e) => {
+                                // Trigger action on Enter or Space key
+                                if (e.key === 'Enter' || e.key === ' ') {
+                                    e.preventDefault();
+                                    handleTabChange(index);
+                                }
+                            }}
+                            aria-label={`Project ${index + 1}: ${project.shortLabel}`}
+                            aria-pressed={selectedTab === index}
+                            className={`flex-shrink-0 w-64 rounded-xl border-2 transition-all duration-300 cursor-pointer p-0 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00d9ff] focus-visible:ring-offset-2 focus-visible:ring-offset-[#050714] ${
                                 selectedTab === index
                                     ? 'border-[#00d9ff] bg-gradient-to-br from-[#00d9ff]/10 to-[#8b5cf6]/10 shadow-lg shadow-[#00d9ff]/20'
                                     : 'border-white/20 bg-white/5 hover:border-white/40 hover:bg-white/10'
                             }`}
-                            onClick={() => handleTabChange(index)}
                             style={{ scrollSnapAlign: 'start' }}
                         >
                             <div className="p-4">
@@ -83,13 +92,15 @@ export const MobileNav: React.FC<MobileNavProps> = ({
                                     {project.shortLabel}
                                 </h3>
                                 <p className="text-xs text-[#64748b] line-clamp-2 leading-relaxed">
-                                    {typeof project.longDescription[0] === 'string'
-                                        ? project.longDescription[0]
-                                        : project.longDescription[0].main
+                                    {project.longDescription && project.longDescription.length > 0
+                                        ? typeof project.longDescription[0] === 'string'
+                                            ? project.longDescription[0]
+                                            : project.longDescription[0]?.main ?? ''
+                                        : ''
                                     }
                                 </p>
                             </div>
-                        </div>
+                        </button>
                     ))}
                 </div>
 

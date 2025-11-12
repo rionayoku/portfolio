@@ -20,6 +20,7 @@ export const DesktopNav: React.FC<DesktopNavProps> = ({
                     <button
                         key={index}
                         data-project-index={index}
+                        aria-current={selectedTab === index ? "true" : "false"}
                         className={`relative w-full text-left p-4 pr-8 transition-colors duration-300 ${
                             selectedTab === index
                                 ? 'text-[#00d9ff]'
@@ -37,8 +38,7 @@ export const DesktopNav: React.FC<DesktopNavProps> = ({
                                 transition={{ type: "spring", stiffness: 300, damping: 30 }}
                             />
                         )}
-                    </button>
-                ))}
+                    </button>                ))}
             </div>
         </div>
     );
