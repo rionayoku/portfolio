@@ -8,7 +8,6 @@ import Experience from './components/Experience';
 const Projects = lazy(() => import('./components/Projects'));
 import Education from './components/Education';
 import Contact from './components/Contact';
-import MobileNav from './components/MobileNav';
 import SectionWrapper from './components/SectionWrapper';
 
 const Loader: React.FC = () => (
@@ -49,7 +48,6 @@ const App: React.FC = () => {
                         <SectionWrapper id="education"><Education /></SectionWrapper>
                         <SectionWrapper id="contact"><Contact /></SectionWrapper>
                     </main>
-                    <MobileNav />
                 </div>
             </div>
         </LazyMotion>

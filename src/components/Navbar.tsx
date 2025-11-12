@@ -16,17 +16,6 @@ interface NavBarProps {
 
 export function NavBar({ items, className }: NavBarProps) {
   const [activeTab, setActiveTab] = useState(items?.[0]?.name ?? '')
-  const [isMobile, setIsMobile] = useState(false)
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768)
-    }
-
-    handleResize()
-    window.addEventListener("resize", handleResize)
-    return () => window.removeEventListener("resize", handleResize)
-  }, [])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -89,13 +78,15 @@ export function NavBar({ items, className }: NavBarProps) {
         "fixed bottom-0 sm:top-0 left-1/2 -translate-x-1/2 z-50 mb-6 sm:pt-6",
         className,
       )}
+      style={{ pointerEvents: 'none' }}
     >
       <div className="flex items-center gap-2 bg-white/5 border border-white/10 backdrop-blur-xl py-2 px-2 rounded-full shadow-2xl" style={{
         background: 'rgba(255, 255, 255, 0.05)',
         backdropFilter: 'blur(20px) saturate(180%)',
         WebkitBackdropFilter: 'blur(20px) saturate(180%)',
         border: '1px solid rgba(255, 255, 255, 0.1)',
-        boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.37), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
+        boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.37), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
+        pointerEvents: 'auto'
       }}>
         {items.map((item) => {
           const Icon = item.icon
@@ -113,6 +104,7 @@ export function NavBar({ items, className }: NavBarProps) {
               )}
               style={{
                 transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                pointerEvents: 'auto'
               }}
             >
               <span className="hidden md:inline relative z-10">{item.name}</span>
