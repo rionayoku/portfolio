@@ -24,10 +24,10 @@ export const projectsData: Project[] = [
             'Achieved 99.9% uptime visibility with proactive monitoring and detailed analytics'
         ],
         images: [
-            new URL('../../images/TTC/zabbix-dashboard.png', import.meta.url).href,
-            new URL('../../images/TTC/Cacti.png', import.meta.url).href,
-            new URL('../../images/TTC/network-topology.png', import.meta.url).href,
-            new URL('../../images/TTC/cacti1.png', import.meta.url).href
+            `${import.meta.env.BASE_URL}src/images/TTC/zabbix-dashboard.png`,
+            `${import.meta.env.BASE_URL}src/images/TTC/Cacti.png`,
+            `${import.meta.env.BASE_URL}src/images/TTC/network-topology.png`,
+            `${import.meta.env.BASE_URL}src/images/TTC/cacti1.png`
         ]
     },
     {
@@ -42,19 +42,19 @@ export const projectsData: Project[] = [
             'Configured and managed MikroTik RouterOS devices in production networks.'
         ],
         images: [
-            new URL('../../images/Mamberamo/jyp-sarmi-mamberamo_optimized.mp4', import.meta.url).href,
-            new URL('../../images/Mamberamo/mi.jpeg', import.meta.url).href,
-            new URL('../../images/Mamberamo/Sarmi-Burmeso.png', import.meta.url).href,
-            new URL('../../images/Mamberamo/ptt.jpg', import.meta.url).href,
-            new URL('../../images/Mamberamo/mountain3towerinstallation.jpeg', import.meta.url).href,
-            new URL('../../images/Mamberamo/Burmeso2.png', import.meta.url).href,
-            new URL('../../images/Mamberamo/mountain2towerinstallation.jpeg', import.meta.url).href,
-            new URL('../../images/Mamberamo/ptt-tower-burmeso1.jpg', import.meta.url).href,
-            new URL('../../images/Mamberamo/ptt-tower-burmeso2.jpg', import.meta.url).href,
-            new URL('../../images/Mamberamo/mountain1towerinstallationShelter.jpg', import.meta.url).href,
-            new URL('../../images/Mamberamo/mountain4towerinstallation.jpg', import.meta.url).href,
-            new URL('../../images/Mamberamo/mountain5towerinstallation.jpg', import.meta.url).href,
-            new URL('../../images/Mamberamo/mountain6towerinstallation.jpg', import.meta.url).href
+            `${import.meta.env.BASE_URL}src/images/Mamberamo/jyp-sarmi-mamberamo_optimized.mp4`,
+            `${import.meta.env.BASE_URL}src/images/Mamberamo/mi.jpeg`,
+            `${import.meta.env.BASE_URL}src/images/Mamberamo/Sarmi-Burmeso.png`,
+            `${import.meta.env.BASE_URL}src/images/Mamberamo/ptt.jpg`,
+            `${import.meta.env.BASE_URL}src/images/Mamberamo/mountain3towerinstallation.jpeg`,
+            `${import.meta.env.BASE_URL}src/images/Mamberamo/Burmeso2.png`,
+            `${import.meta.env.BASE_URL}src/images/Mamberamo/mountain2towerinstallation.jpeg`,
+            `${import.meta.env.BASE_URL}src/images/Mamberamo/ptt-tower-burmeso1.jpg`,
+            `${import.meta.env.BASE_URL}src/images/Mamberamo/ptt-tower-burmeso2.jpg`,
+            `${import.meta.env.BASE_URL}src/images/Mamberamo/mountain1towerinstallationShelter.jpg`,
+            `${import.meta.env.BASE_URL}src/images/Mamberamo/mountain4towerinstallation.jpg`,
+            `${import.meta.env.BASE_URL}src/images/Mamberamo/mountain5towerinstallation.jpg`,
+            `${import.meta.env.BASE_URL}src/images/Mamberamo/mountain6towerinstallation.jpg`
         ]
     },
     {
@@ -69,8 +69,8 @@ export const projectsData: Project[] = [
             'Enhanced security and incident prevention through advanced monitoring'
         ],
         images: [
-            new URL('../../images/cctv-project/cctvss_optimized.mp4', import.meta.url).href,
-            new URL('../../images/cctv-project/networkdiagram.jpg', import.meta.url).href
+            `${import.meta.env.BASE_URL}src/images/cctv-project/cctvss_optimized.mp4`,
+            `${import.meta.env.BASE_URL}src/images/cctv-project/networkdiagram.jpg`
         ]
     },
     {
@@ -86,21 +86,21 @@ export const projectsData: Project[] = [
             'Ensured continuous operation in harsh environmental conditions'
         ],
         images: [
-            new URL('../../images/YongsuProject/yongsu.png', import.meta.url).href,
-            new URL('../../images/YongsuProject/yongsu2.png', import.meta.url).href,
-            new URL('../../images/YongsuProject/yongsucliff.png', import.meta.url).href,
-            new URL('../../images/YongsuProject/yongsucliff2.png', import.meta.url).href,
-            new URL('../../images/YongsuProject/heli1.png', import.meta.url).href,
-            new URL('../../images/YongsuProject/heli2.png', import.meta.url).href,
-            new URL('../../images/YongsuProject/heli3.png', import.meta.url).href,
-            new URL('../../images/YongsuProject/heli4.png', import.meta.url).href,
-            new URL('../../images/YongsuProject/heli5.png', import.meta.url).href,
-            new URL('../../images/YongsuProject/heli6.png', import.meta.url).href,
-            new URL('../../images/YongsuProject/heli7.png', import.meta.url).href,
-            new URL('../../images/YongsuProject/heli8.png', import.meta.url).href,
-            new URL('../../images/YongsuProject/heli9.png', import.meta.url).href,
-            new URL('../../images/YongsuProject/heli10.png', import.meta.url).href,
-            new URL('../../images/YongsuProject/dormena.png', import.meta.url).href
+            `${import.meta.env.BASE_URL}src/images/YongsuProject/yongsu.png`,
+            `${import.meta.env.BASE_URL}src/images/YongsuProject/yongsu2.png`,
+            `${import.meta.env.BASE_URL}src/images/YongsuProject/yongsucliff.png`,
+            `${import.meta.env.BASE_URL}src/images/YongsuProject/yongsucliff2.png`,
+            `${import.meta.env.BASE_URL}src/images/YongsuProject/heli1.png`,
+            `${import.meta.env.BASE_URL}src/images/YongsuProject/heli2.png`,
+            `${import.meta.env.BASE_URL}src/images/YongsuProject/heli3.png`,
+            `${import.meta.env.BASE_URL}src/images/YongsuProject/heli4.png`,
+            `${import.meta.env.BASE_URL}src/images/YongsuProject/heli5.png`,
+            `${import.meta.env.BASE_URL}src/images/YongsuProject/heli6.png`,
+            `${import.meta.env.BASE_URL}src/images/YongsuProject/heli7.png`,
+            `${import.meta.env.BASE_URL}src/images/YongsuProject/heli8.png`,
+            `${import.meta.env.BASE_URL}src/images/YongsuProject/heli9.png`,
+            `${import.meta.env.BASE_URL}src/images/YongsuProject/heli10.png`,
+            `${import.meta.env.BASE_URL}src/images/YongsuProject/dormena.png`
         ]
     },
     {
@@ -115,14 +115,14 @@ export const projectsData: Project[] = [
             'Ensured stable connectivity for business operations'
         ],
         images: [
-            new URL('../../images/TVRI/1.jpeg', import.meta.url).href,
-            new URL('../../images/TVRI/2.jpeg', import.meta.url).href,
-            new URL('../../images/TVRI/3.jpeg', import.meta.url).href,
-            new URL('../../images/TVRI/4.jpeg', import.meta.url).href,
-            new URL('../../images/TVRI/5.jpeg', import.meta.url).href,
-            new URL('../../images/TVRI/6.jpeg', import.meta.url).href,
-            new URL('../../images/TVRI/7.jpeg', import.meta.url).href,
-            new URL('../../images/TVRI/mi6.jpeg', import.meta.url).href
+            `${import.meta.env.BASE_URL}src/images/TVRI/1.jpeg`,
+            `${import.meta.env.BASE_URL}src/images/TVRI/2.jpeg`,
+            `${import.meta.env.BASE_URL}src/images/TVRI/3.jpeg`,
+            `${import.meta.env.BASE_URL}src/images/TVRI/4.jpeg`,
+            `${import.meta.env.BASE_URL}src/images/TVRI/5.jpeg`,
+            `${import.meta.env.BASE_URL}src/images/TVRI/6.jpeg`,
+            `${import.meta.env.BASE_URL}src/images/TVRI/7.jpeg`,
+            `${import.meta.env.BASE_URL}src/images/TVRI/mi6.jpeg`
         ]
     },
     {
@@ -136,8 +136,8 @@ export const projectsData: Project[] = [
             'Provided installation, maintenance, and troubleshooting services for banking machines'
         ],
         images: [
-            new URL('../../images/IBM/50thfloorIBM.jpg', import.meta.url).href,
-            new URL('../../images/IBM/lobbyIBM.jpg', import.meta.url).href
+            `${import.meta.env.BASE_URL}src/images/IBM/50thfloorIBM.jpg`,
+            `${import.meta.env.BASE_URL}src/images/IBM/lobbyIBM.jpg`
         ]
     },
     {
@@ -152,11 +152,11 @@ export const projectsData: Project[] = [
             'Maintained 24/7 system availability for tax processing functions'
         ],
         images: [
-            new URL('../../images/ProjectPBBkabJYp/pbbkabjyp1.jpg', import.meta.url).href,
-            new URL('../../images/ProjectPBBkabJYp/pbbkabjyp2.jpg', import.meta.url).href,
-            new URL('../../images/ProjectPBBkabJYp/pbbkabjyp3.jpg', import.meta.url).href,
-            new URL('../../images/ProjectPBBkabJYp/pbbkabjyp4.jpg', import.meta.url).href,
-            new URL('../../images/ProjectPBBkabJYp/pbbkabjyp5.jpg', import.meta.url).href
+            `${import.meta.env.BASE_URL}src/images/ProjectPBBkabJYp/pbbkabjyp1.jpg`,
+            `${import.meta.env.BASE_URL}src/images/ProjectPBBkabJYp/pbbkabjyp2.jpg`,
+            `${import.meta.env.BASE_URL}src/images/ProjectPBBkabJYp/pbbkabjyp3.jpg`,
+            `${import.meta.env.BASE_URL}src/images/ProjectPBBkabJYp/pbbkabjyp4.jpg`,
+            `${import.meta.env.BASE_URL}src/images/ProjectPBBkabJYp/pbbkabjyp5.jpg`
         ]
     },
     {
@@ -171,12 +171,12 @@ export const projectsData: Project[] = [
             'Implemented solutions across various challenging environments and terrains'
         ],
         images: [
-            new URL('../../images/WIFI-Installations/wifi-analyzer.jpeg', import.meta.url).href,
-            new URL('../../images/WIFI-Installations/wifi-dish.jpeg', import.meta.url).href,
-            new URL('../../images/WIFI-Installations/wifi-dish2.jpeg', import.meta.url).href,
-            new URL('../../images/WIFI-Installations/wifi-dish3.jpeg', import.meta.url).href,
-            new URL('../../images/WIFI-Installations/site1.jpeg', import.meta.url).href,
-            new URL('../../images/WIFI-Installations/router-mikrotik.jpeg', import.meta.url).href
+            `${import.meta.env.BASE_URL}src/images/WIFI-Installations/wifi-analyzer.jpeg`,
+            `${import.meta.env.BASE_URL}src/images/WIFI-Installations/wifi-dish.jpeg`,
+            `${import.meta.env.BASE_URL}src/images/WIFI-Installations/wifi-dish2.jpeg`,
+            `${import.meta.env.BASE_URL}src/images/WIFI-Installations/wifi-dish3.jpeg`,
+            `${import.meta.env.BASE_URL}src/images/WIFI-Installations/site1.jpeg`,
+            `${import.meta.env.BASE_URL}src/images/WIFI-Installations/router-mikrotik.jpeg`
         ]
     },
     {
@@ -191,7 +191,7 @@ export const projectsData: Project[] = [
             'Delivered reliable communication systems for enhanced guest experience'
         ],
         images: [
-            new URL('../../images/HotelAstonJYP/astonHotel.jpg', import.meta.url).href
+            `${import.meta.env.BASE_URL}src/images/HotelAstonJYP/astonHotel.jpg`
         ]
     },
 ];
